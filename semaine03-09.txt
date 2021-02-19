@@ -1,0 +1,93 @@
+//HORAIRES: 
+Lundi       --   14h-17h
+
+Mardi
+à        10h-12h 14h-17h
+Vendredi
+
+
+-- contexte1: site d'une association "le monde des sourds pour tous!" créé sous joomla par Thierry Braud--
+-- pb d'affichage sous ie 7,8,9--
+-- solutions: soit trouver l'origine du pb et le reparer--
+	    --  soit trouver l'origine du pb et afficher un bandeau d'erreur de compatibilité de navigateur--
+
+--contexte2: modification sous gimp du bandeau d'accueil du site (prévu)--
+
+
+
+03/06 apres-midi
+recherche du probleme
+decouverte d'un soucis au niveau du css incompatible:
+sous ie 7,8,9, bandeau d'accueil non centré et pas de menu affiché
+
+--> décision prise avec le tuteur d'afficher un message d'erreur (la reparer serait trop long)
+decouverte des commentaires conditionnels
+
+
+04/06 matin 
+installation de IEtester
+création d'un script daffichage d'erreur de compatibilité (navError.html)
+
+04/06 apres_midi
+creation d'un script de test des comm condi (test.html) -> pour verifier la sureté de la methode
+test (2h) -->ok
+
+recherche du bon script a modifier 
+
+05/06 matin
+bon script à modifier trouvé: siteWebJoomla/templates/beez_20/index.php
+			partie tronquée placée dans le fichier "./stock.php"
+			partie ajoutée balisée par des commentaires
+			dossier contenant la page d'affichage d'erreur ajouté: "ieError" contenant: les logos mozilla, firefox et 
+													chrome, script d'affichage
+			ajout d'un fichier sécurité "index.html" dans ieError
+			rédaction du compte-rendu du 03,04,05
+			test du site sur ie (donc envoi du zip sous win7)
+
+05/06 apres-midi
+modification du fichier de connexion a la base pour tester en loopback ("siteWebJoomla/configuration.php")
+ ->creation d'un compte mysql sur wamp
+ 	->log: clem
+	->mdp: ini01
+ ->installation de joomla sur wamp
+	->log mysql: clem
+	->mdp mysql:**********
+	->nom base sql: joomla17
+	->nom du site : asso-lsf-05
+	->su joomla login: admin
+	->mdp: *********
+->renommage du dossier d'install
+
+
+06/06 matin
+PAUSE JOOMLA! (je suis bloquée donc stop la prise de tete)
+aujourd'hui: montage d'ordinateur
+->ouverture du boitier des deux cotés
+->placement du cache des ports
+->fixation de la carte mère
+->fixation des disques durs
+->pose du lecteur/graveur
+	->demontage de la facade (attention : pour le remontage, commencer a devisser jusqua entendre le "clic" pour etre sur de ne pas abimer
+	  la façade
+->montage du processeur (penser a enlever la secu)
+->fixation du ventilo (+verrouillage)
+->montage de la ram (suivre A et B inscrits sur carte mere), penser a ecarter les caches
+->branchage
+	->alim generale
+	->alim ATX
+	->ports sata (logo sata tjs vers le haut)
+->fixation graveur (verifier qu'il n'est ni trop en arriere ni trop en avant
+->branchement des ports usb/audio/connector panel/sata + branchement speaker
+
+06/06 apres-midi
+->test d'allumage  ->ok
+->configuration du bios
+->installatoin de windows 7
+->installation des pilotes
+	->cpu
+	->chipset graphique
+	->carte reseau
+	->audio
+->formatage de D:
+-> transfert des dossiers de favoris de C:/userS/blablabl vers D:/user/
+->installation des logiciels

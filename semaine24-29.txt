@@ -1,0 +1,110 @@
+24/06 apres midi
+
+->creation d'un fichier de déconnexion : lib_deco.inc.php
+->creation d'un fichier de controle de session : controle.inc.php
+
+25/06 matin
+->on annule tout et on regarde un peu le fichier htaccess
+->création de la base de données sur le serveur mysql super-h
+	->probleme: interdiction d'en créer une autre.
+	->on va créer dans la base déjà existante.
+->image facebook de svs changée
+
+25/06 apres-midi
+->on poursuit sur le htaccess
+	->creation du fichier de mdp
+	->cryptage avec "htpasswd"
+	->securisation de ce fichier: creation d'un dossier "secure " -> fichier de mot de passe mis dedans avec un .htaccess contenant "deny from all"
+	->on crée le htaccess meme
+	->test: galère!
+	->c'est ok si le mdp n'est pas crypté.
+	->impossibilité de créer un mini-site sous un site joomla.
+	->on decide de le créer sur le serveur free (implique un mdp non crypté)
+	->mise a jour de la bdd
+	->on passe a la tentative de creation d'un odt
+
+26/06 matin
+ ->mise a jour du log de modification de la bdd pour laurent
+ ->la creation de l'odt ne fonctionne pas 
+ -> trouvé: il faut créer un odt vide dans le dossier odt, générer le xml et compresser le tout.... ca marche toujours pas...
+
+27/06 apres midi
+-> on tente le html
+->ca marche ET en passant par l'impression, on peut créer un pdf!!!!
+
+
+28/06 matin
+->on continue les recherches pour l'odt. renseignement sur gzip.
+->on se rend compte que non seulement il y a besoin de précréer un fichier.odt mais que en plus il faut le placer décompressé!
+->gzip fonctionne très bien. gunzip beaucoup moins. dommage, c'est celui dont j'avais besoin en premier.
+->le serveur free est sous os windows. je testais donc mes script sous wamp. on va quand meme tester linux pour voir. si ca marche, c'est que pour windows on est dans la mouise.
+->j'ai pu décompresser sous linux. j'envoie les fichiers obtenus sur wamp. on va retenter l'execution du script comme ca.
+->gzip est très récalcitrant. On passe a la création d'un csv....
+->récupération d'un script créé en cours il y a quelques mois de ca.
+
+28/06 apres midi
+->on met a jour le <form> dans a_jour.php
+->on met en place le formulaire de creation csv.
+	->non seulement ca marche, mais en plus: ca télécharge, et quand on ouvre, ca ouvre en ods . PAR-FAIT!
+
+->on met en place un générateur de html et csv pour les sans coordonnees.
+->prise en charge d'un client. depuis l'installation d'un nouvel antivirus, plus d'affichage d'images ou videos sur le navig.
+	->on regarde. un composant McAfee(antivir initial)  mal désinstallé et rend incompatible autre antivirus + crée des beugs.
+	->on force le retrait de ce composant (SiteAdvisor)
+	->on installe avira.
+	->ca marche, on est content.
+
+->on passe au mailing, pour CHAQUE adherent non à jour, on doit générer DYNAMIQUEMENT une lettre de relance
+	->on part sur une idée de génération html à enregistrer sous pdf... a voir...
+	->l'idee était pas mauvaise... si?... enfi en tout cas, ça marche pas. le pdf généré finit décalé au bout de 4 ou 5 pages.
+
+28/06 matin
+	->réparation de tour d'ordi. selon le client, c'est le connecteur qui déconne. on vérifie quand même.
+		->connecteur ok
+		->carte graphique ok
+		->cables ok
+		->probablement la carte-mere elle-meme qui est grillée.
+		->je laisse laurent à son probleme de carte-mere capricieuse et retourne sur le mini-site
+->on va créer deux moyens de mailer: le premier est la génération d'un csv tout bête listant les membres n'étant pas
+à jour de leur cotisation. en le récupérant et en utilisant OO Base, laurent pense pouvoir se débrouiller. Moi ca ne me convient pas, trop compliqué, trop de manipulations à faire de la part de l'utilisateur qui devrait avoir un site entièrement opérationnel, d'où ma seconde idée (on fera les deux): l'utilisation de la librairie FPDF, déstinée à créer des PDF via full PHP
+->go csv.
+->fini, ca marche
+
+28/06 apres-midi
+
+->go fpdf.
+	->telechargement du zip, des tutos d'intro et du manuel complet d'utilisation.
+	->prise de connaissance de l'utilisation de la bibli
+	->on tente. 
+	->script fait, on teste ->ok
+->on envoie sur le serveur
+->modif du fichier config.inc.php pour l'adapter a la database du serveur ->ok
+->création d'un dossier sur le serveur ->ok
+->introduction du squelette SQL ->ok
+->modif de l'htaccess avec un vrai login et un vrai mdp ->ok
+->envoi du site sur serveur ->ok
+-> test ->ok
+-> test htaccess -> ca rame
+	->chez free, la syntaxe de la première ligne n'est pas la même -> on modifie
+	->le fichier de mot de passe ne doit pas etre en .htpassword mais en .txt -> on modifie
+	->on crée un info.php pour trouver le doc_root en chemin absolu: /mnt/110/sda/d/c/asso.lsf.05/secure/htpasswd.txt
+	->plus d'erreur 500: le site est bien bloqué pas un mdp.
+	->quand on entre le mdp, ca recharge le htaccess...
+->ca galère. sur les forums, on peut lire que beaucoup de gens ont eu le meme probleme chez free et recoivent pour conseil 
+de changer d'hebergeur ou de passer par les $_session. donc on va re-tenter.
+->changement de mot de passse d'une base jusqu'alors inutilisée
+->formulaire de connexion 
+	->création du formulaire->ok
+	->test ->ok
+	->test de vérification de l'existence des variables session "testConnexion.php" et "coSite.inc.php"->ok
+	->test de vérifiaction de connection au site ->ok
+->formulaire de déconnexion "deconnexion.php" ->ok
+-> integration des formulaires de vérification à toutes les pages
+->test ->ok
+->on balance le script sur le site ->ok
+->création d'un repertoire "sessions" ->ok plus de warnings
+->test de sécurité -> ok
+->on balance les données ->ok 
+ -> le site fonctionne. il sera posté sur git sans les données ni les mots de passe.
+
+ pour tester, il faudra créer les données a mettre dans la base, un nom de user et un mdp. Le nom de la base est asso_lsf_05.

@@ -1,0 +1,141 @@
+10/06 apres-midi
+
+grosse prise de tete pour le test d'affichage du script:
+->sous virtual XP pour tester avec iexplorer ->impossible de telecharger IE7
+->sous wine ->test qui sera erroné car sous gecko mozilla
+->sous 7-> wamp ne détecte pas le site joomla
+->sous vitrual linux: iestester n'existe pas
+tentative de connexion en superadmin sur joomla: echec....
+
+
+11/06 matin
+->verification de la compatibilité w3c des deux scripts modifiés
+	->suppression des erreurs
+	->fichier compatible
+->décisison prise de voir si les scripts fonctionnent en balançant directement les scripts sur le serveur
+->balancement des deux scripts sur le serveur en ssh
+	->ENCORE un probleme de connexion et de mot de passe incorrect! impossible de se connecter au serveur ftp...
+	->normal, on n'est pas en ssh, mais en ftp.
+	->decouverte de la commande "ftp"
+	->"connection timed out" : téléchargement de filezilla
+	->rapidité de lancement et de prise en main de filezilla IMPRESSIONNANTES par rapport aux lignes de commande......
+	->CA MARCHE!!! ie testé-> ok
+					chrome testé->ok!
+
+
+11/06 apres midi
+-- seconde tâche: amélioration des sites formaintinfo.com et sun-valley-systems.fr 
+--a) réaliser l'intégration avec facebook sur les sites Formaint'info et SunValleySystems
+--b) s'informer sur la notion de flashcode et trouver un outil de préférence sous linux pour créer des flash code
+--c) mise a jour et correction d'erreurs du site Formaint'info
+
+a) -> recherche sur la manière d'intégrer facebook: https://
+developers.facebook.com/docs/reference/plugins/like-box/
+
+->plugins choisis:follow button et like box
+->récupération des url de chaque page:
+		-https://www.facebook.com/formaintinfo?fref=ts
+		-https://www.facebook.com/sun.valley.systems?fref=ts
+->choix des emplacements
+->choix de l'apparence des plugin
+->création des scripts a placer	
+->recuperation des dossiers du site formaint'info (via filezilla) sur le serveur pour tests. pas besoin pour l'instant de récupérer SVS, qui est sur joomla. 
+
+b) ->recherche sur différents sites. Synthèse dans FlashCode.odt (à venir).
+
+a) -> on attaque l'integration à SVS, qui est sur joomla. je me réserve formaint'info pour la fin (full php, la cerise!)
+ ->recherche de modules joomla d'integration facebook
+
+
+
+12/06 matin
+->laurent est en déplacement pour 30 minutes, c'est moi qui ouvre la boutique et accueille les clients
+-> prise en charge des clients, diagnostic de leur probleme...
+->téléchargement et installation d'une extension "facebook like et box" pour le site sun-valley-systems.fr
+->création de deux modules: "facebook box " pour le menu "actualités"(like box) , et facebook like pour le menu "accueil"(follow button)
+-> je tente de trouver un bon emplacement mais je rame!
+
+
+
+12/06 après-mdi
+-> on continue la recherche sur les modules joomla (pour trouver un bon positionnement)
+->laurent est débordé, je l'aide: prise d'appels, accueil clientèle et diagnostic de deux pc déféctueux + démontage d'un asus portable, restauration pc, encore un pc défectueux, demontage et remplacement d'un lecteur/graveur sur pc portable
+
+
+
+13/06 matin
+-> ca se débloque! on crée une nouvelle position de module
+	->récuperation du fichier templateDetail.xml sur le serveur
+	->renommage du fichier original en templateDetailOri.xml
+	->modification du fichier récupéré et renvoi sur le serveur
+	->modification dans la console admin de joomla du template même (index.php) : on crée une nouvelle position "central" dans une nouvelle div "central" (qui nous permettra dans la mettre en page dans un css)
+	->la nouvelle position fonctionne
+	->le lien de menu "actualités" etait un fil d'actualités RSS, je le modifie en article.
+	->la box étant transparente, son écriture grise et le fond du template bleu, c'est assez laid et illisible-> modification du fichier css pour avoir un fond blanc.
+-> le module "facebook like" créé précédemment est ajouté en position "central" sur la page d'accueil.
+-> joomla sun-valley-systems.fr fini, youpi!
+
+->mise a jour de git
+
+->on attaque formaint'info (en local)
+	->mise en place du follow button dans le script "index.php"
+	->mise en place de la like box dans "contact.php"
+	->mise en position dans le script "styles.css"
+
+
+
+13/06 apres-midi
+-> on continue la modification du css
+->placement de commentaires & indentation dans le contact.php parce que cest UN SAC DE NOEUDS DE DIV!!!!
+->div placée correctement.
+-> il faudra voir pourquoi le follow button est affiché en anglais
+		->le lien qui pointe vers facebook est bien en francais, a partir de la je pense quil ny a rien a faire...
+
+--b) rédaction de FlashCode.odt
+
+--c) Mise a jour et correction d'erreurs du site Formaint'info
+->dans la page contact ajout de windows 7,8 et mac dans le choix des SE
+->modification de la déclaration d'activité (toujours dans contact)
+->SIRET passé de 15 a 23
+->APE modifié
+->mise a jour dans le fichier "salp.inc.php" du numero ASP
+->page lien: correction d'une faute de conjugaison
+->actualisation des tarifs, page formation, 
+->page maintenance
+
+->ajout d'une favicon dans tous les fichiers. je ne les mettrai pas tous en ligne, un ou deux déjà présents suffisent amplement.
+	->(création de la favicon sur le site http://favicon.htmlkit.com/favicon/)
+
+//note\\
+fichiers modifiés: index.php
+				   contact.php
+				   styles.css
+				   salp.inc.php
+				   formation.php
+				   maintenance.php
+				  
+
+14/06 matin
+->reglage de détails sur la favicon
+->petit quart d'heure gestion/compta ->saisie de factures, nouveaux clients..... sous EBP (XP)
+->balancement des fichiers modifiés sur le serveur
+->test du site
+->test du formulaire de contact
+->site formaintinfo.com fini et fonctionnel! 
+
+
+14/06 apres-midi
+-- Troisième tâche: mini-site internet de gestion des membres
+-- a) se renseigner auprès de l'hebergeur si on peut executer des requetes sql a distance
+-- b) si ce n'est pas possible faire une fonction d'exportation/importation de la base de données (sans passser par PhpMyAdmin qui est trop compliqué pour un utilisateur lambda)
+-- c) faire une mise en ligne de ce mini-site internet dans un sous-emplacement du site internet de l'association. Il faut qu'il soit sécurisé au maximum
+-- d) etudier comment ecrire une requete conditionnelle notamment pour les modèles de publipostage LibreOffice 
+
+->prise de connaissance du contexte
+->un site  de gestion de membre de l'association Le Monde Des Sourds Pour Tous est en local, il faut le balancer sur un serveur (celui du site), le securiser, donner l'acces uniquement au tresorier et a la secrétaire, voir comment entrer des requetes, comment recup des données, les exporter vers libre office en format odt ou pdf
+->difficultés à comprendre ce qu'on attend de moi, sur ce coup là...
+
+-> a) a priori pour les requete a distances, le serveur super-h ne pose pas de probleme MAIS un seul utilisateur! (source: forum super-h)
+
+-> on nettoie un peu tout ca ->dessin du schema de la base, dessin du schéma des liaisons entre scripts
+

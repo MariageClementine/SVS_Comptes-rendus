@@ -1,0 +1,140 @@
+17/06 apres midi
+
+->modélisation théorique de la base de données: suppression de deux tables, ajout des contraintes et modifications de champs
+->on attaque le code!
+->pause: laurent veut que je l'aide a faire de l'inventaire
+-> on teste l'injection de la structure
+	->création d'une base de données en local (lmstGestion)
+	->injection de la structure ->ok
+	-> injection des données-> ca marche pas! modification du script pour que les données récupérées correspondent aux nouvelles tables
+
+18/06 matin
+
+	->ca y est ca marche! base de données opérationnelle
+-> pause site
+-> installation de linux sur un netbook 
+
+18/06 apres midi
+
+-> démontage entier de pc portable, 
+	->retrait de la batterie
+	->retrait du cache 
+	->retrait du DD et des RAM
+	->retrait des vis (batterie, coque externe)
+	->demontage de la carte wifi
+	->retrait des vis (coque interne)
+	->déconnexion des fils
+	->retrait du clavier
+	->retrait de la coque support du clavier
+	->retrait du cache du ventilateur
+	->deconnexion des fils
+	->retrait de l'ecran
+	->retrait de la carte mère sur laquelle est fixé le ventilo
+
+-> nettoyage du systeme de ventilation, remontage
+-> installation de windows 7
+-> recherche et installation des pilotes
+
+19/06 matin
+-> prise en charge du contexte du site 
+	-> dessin d'un schéma représentant les liaisons entre les différents fichiers
+-> modification des fichiers a_jour.php et adhérents.php pour les adapter a la nouvelle base. a chaque modif-> test dans console mySQL
+
+19/06 apres midi
+-> on continue les modifs
+	-> modif de:
+				-ajouter_adherent.php 					->test requete:OK
+				-ajouter_sourd.php  					->test requete:OK
+				-contacts.php  							->test requete:OK
+				-courriels.php 							->test requete:OK
+				-courriers.php  						->test requete:OK
+				-fax.php  ->test requete:OK
+				-gerer_adherent.php (tres long script)  ->test requete:OK
+
+20/06 matin
+-> on continue les modifs
+->en même temps, prise en charge des clients: remise d'un devis, remise d'un téléphone portable réparé.
+	-> modif de:
+				-gerer_adherent.php ->fin  				->test requete:OK
+				-gerer_sourds.php  						->test requete:OK
+				-index.php  							->test requete:OK
+				-institutionnels.php  					->test requete:OK
+				-portables.php  						->test requete:OK
+				-sans_coordonnees.php  					->test requete:OK
+				-sourds.php  							->test requete:OK
+				-eleves.php (tres long aussi)->ligne 422
+					->gros soucis au niveau d'une requete dans ce script: je planche dessus
+20/06 apres midi
+->test requete:OK
+	->on passe aux includes
+				-accueil.inc.php ->RAF
+				-config.inc.php ->RAF
+				-connexion.inc.php
+				-footer.inc.php ->RAF
+				-header.inc.php ->RAF
+				-menu.inc.php ->RAF
+	->on passe aux lib
+				-lib_date.inc.php ->RAF
+				-lib_db.inc.php 
+				-lib_forms.inc.php ->RAF
+				-lib_mail.inc.php ->RAF
+->on teste le script en local. 
+			->accueil marche
+			->on modifie le css pour pouvoit lire les messages d'erreur
+->accueil: ok
+->gestion des adherents:
+	->affichage: problemes. ->ok
+	->ajout: problemes. ->ok
+	->modification: problemes. ->ok
+	->gestion des adhesions:
+		->ajout: ->ok
+		->suppression: ->ok
+
+
+21/06 matin
+		->modification: problemes. ->ok
+	->passage en eleve: ->ok
+	->suppression: ->ok
+->a jour: problemes. ->ok
+->courriel: ->ok
+->courrier: ->ok
+->fax: ->ok
+->portables: ->ok
+->sans coordonnées: ->ok
+
+
+21/06 apres midi
+->pause site: on s'occupe d'un peu de pao pour faire une image de profil de la page facebook sun valley system
+->eleves:
+	->affichage: mauvaise requete d'affichage. ->ok
+
+->au niveau des modifs d'eleves on rencontre quelle que soit la modif le mm pb. a voir: à quoi correspond le "dernier id" affiché?
+->trouvé: il récupère le dernier id affiché dans le tableau.
+	dans le but de vérifier que l'id saisi est bien entre 1 et le dernier : donc dans la base: donc valide
+	seulement, le tableau était trié par ordre alphabétique..... donc le dernier id était 58......
+
+	->niveau: 
+		->ajout: problemes. ->ok
+		->modification: problemes. ->ok 
+		->suppression: ->ok
+	->suppression: problemes. ->ok
+	->recréer: ->ok
+	->enlever: ->ok
+->sourds: 
+	->affichage: problemes. ->ok
+	->ajout: ->ok
+	->modification: ->ok
+	->passage en adherent:
+	->suppression: ->ok
+
+->institutionnels:
+	->affichage: ->ok
+	->le reste est à coder, ce n'est pas encore fait.
+	->création des formulaires de redirection->ok
+	->formulaire d'ajout : ->ok
+	->formulaire de gestion:
+		->modification: problemes. -> ok
+		->suppression: problemes. -> ok
+->contacts: ok
+
+
